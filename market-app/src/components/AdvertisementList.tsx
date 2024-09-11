@@ -1,24 +1,18 @@
-import { useGetAdvertisementsQuery } from '../api/advertisement';
+import { Advertisment } from '../types';
 import { AdvertisementCard } from './AdvertisementCard';
 
-const AdvertisementList = () => {
-  const { data, error, isLoading } = useGetAdvertisementsQuery();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    if ('status' in error) {
-      return <div>Error {error.status}</div>;
-    }
-
-    return <div>Error: {error.message}</div>;
+const AdvertisementList = ({
+  advertisements = [],
+}: {
+  advertisements?: Advertisment[];
+}) => {
+  if (advertisements.length === 0) {
+    return <p className="text-center">На этой странице нет объявлений</p>;
   }
 
   return (
     <div className="flex flex-wrap justify-center">
-      {data?.map((advertisement) => (
+      {advertisements.map((advertisement) => (
         <AdvertisementCard
           key={advertisement.id}
           advertisement={advertisement}

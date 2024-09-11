@@ -6,7 +6,7 @@ import { useGetAdvertisementByIdQuery } from '../api';
 
 const AdvertisementPage = () => {
   const { id } = useParams();
-  const { data, error, isLoading } = useGetAdvertisementByIdQuery(id);
+  const { data, error, isLoading } = useGetAdvertisementByIdQuery(id ?? '');
 
   if (isLoading)
     return (
@@ -29,7 +29,7 @@ const AdvertisementPage = () => {
     return (
       <Layout>
         <h1>Error</h1>
-        <p>Missing id parameter</p>
+        <p>Missing data</p>
       </Layout>
     );
   }

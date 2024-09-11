@@ -9,6 +9,10 @@ const router = createBrowserRouter([
     element: <AdvertisementsPage />,
   },
   {
+    path: 'page/:pageParam',
+    element: <AdvertisementsPage />,
+  },
+  {
     path: 'advertisements/:id',
     element: <AdvertisementPage />,
   },
