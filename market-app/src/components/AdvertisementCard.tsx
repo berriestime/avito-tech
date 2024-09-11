@@ -3,14 +3,22 @@ import { Link } from 'react-router-dom';
 import { Advertisment } from '../types';
 import { Arrow } from './Arrow';
 import { Eye } from './Eye';
+import { useDeleteAdvertisementMutation } from '../api';
+import { Trash } from './Trash';
 
 type AdvertisementCardProps = {
   advertisement: Advertisment;
 };
 
 const AdvertisementCard = ({ advertisement }: AdvertisementCardProps) => {
+  const [deleteAdvertisement, { isLoading }] = useDeleteAdvertisementMutation();
+
+  const handleDelete = async () => {
+    await deleteAdvertisement(advertisement.id);
+  };
+
   return (
-    <div className="w-full md:w-1/2 lg:w-1/3 p-4">
+    <div className="relative w-full md:w-1/2 lg:w-1/3 p-4">
       <div className="flex flex-col h-full border-2 border-gray-200 rounded-lg overflow-hidden">
         <img
           className="lg:h-48 md:h-36 w-full object-cover object-center"
@@ -39,11 +47,19 @@ const AdvertisementCard = ({ advertisement }: AdvertisementCardProps) => {
               to={`/advertisements/${advertisement.id}`}
               className="text-indigo-500 inline-flex items-center ml-auto"
             >
-              К покупке
+              К объявлению
               <Arrow />
             </Link>
           </div>
         </div>
+        <button
+          className="absolute top-0 right-0 p-2 bg-white rounded-bl-lg rounded-tr-lg bg-red-400"
+          type="button"
+          onClick={handleDelete}
+          disabled={isLoading}
+        >
+          <Trash />
+        </button>
       </div>
     </div>
   );

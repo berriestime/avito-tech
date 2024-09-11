@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Arrow } from './Arrow';
+import { NewAdvertisementButton } from './NewAdvertisementButton';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -9,6 +10,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="container mx-auto px-0 md:px-6 lg:px-12 min-h-screen flex flex-col justify-center">
+      <header className="py-4">
+        <div className="container mx-auto flex items-center justify-between">
+          <Link to="/" className="text-xl font-bold">
+            Кабинет
+          </Link>
+          <NewAdvertisementButton />
+        </div>
+      </header>
       <div className="bg-white rounded-md shadow-md flex-1 p-4 md:p-6 lg:p-12">
         {displayBack && (
           <Link to="/" className="text-indigo-500 inline-flex items-center">
