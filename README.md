@@ -9,7 +9,7 @@ The seller's personal account on the marketplace allows you to manage your ads.
 
 ```bash
 # inside market-app directory
-$ cd ./client
+$ cd ./market-app
 
 # install dependences
 $ npm install
