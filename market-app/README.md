@@ -1,50 +1,29 @@
-# React + TypeScript + Vite
+# Market
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+Task for avito-tech-internship.
+The seller's personal account on the marketplace allows you to manage your ads.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Running the app
 
-## Expanding the ESLint configuration
+```bash
+# inside market-app directory
+$ cd ./client
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# install dependences
+$ npm install
 
-- Configure the top-level `parserOptions` property like this:
+# run server
+$ npm run server
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# run app
+$ npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Problems
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Unfortunately, I didn't have enough time to create a ordering page.
+I tried Tailwind and RTK Query for the first time, and I want to say, it was a great experience!
+Tailwind is a really cool library, it's so flexible and easy to use.
+RTK Query is also a great tool, it's much easier to learn than regular RTK.

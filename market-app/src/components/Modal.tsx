@@ -1,16 +1,26 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, TouchEventHandler, useState } from 'react';
 
 const Modal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }> = ({ isOpen, onClose, children }) => {
-  const handleClickOutside: MouseEventHandler<HTMLDivElement> = (event) => {
+  const [isInsideModal, setIsInsideModal] = useState(false);
+
+  const handleClickOutside: MouseEventHandler<HTMLDivElement> &
+    TouchEventHandler<HTMLDivElement> = (event) => {
     if (!event.target) return;
     const target = event.target as HTMLElement;
-    if (!target.closest('.modal')) {
+    if (!target.closest('.modal') && !isInsideModal) {
       onClose();
     }
+  };
+
+  const handleMouseDown: MouseEventHandler<HTMLDivElement> &
+    TouchEventHandler<HTMLDivElement> = (event) => {
+    if (!event.target) return;
+    const target = event.target as HTMLElement;
+    setIsInsideModal(!!target.closest('.modal'));
   };
 
   return (
@@ -19,6 +29,8 @@ const Modal: React.FC<{
         isOpen ? '' : 'hidden'
       } flex items-center justify-center min-h-screen text-center p-4`}
       onClick={handleClickOutside}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleMouseDown}
     >
       <div
         className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"

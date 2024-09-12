@@ -1,4 +1,4 @@
-import classes from './Title.module.css';
+import classes from '../styles/Title.module.css';
 
 const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

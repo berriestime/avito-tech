@@ -14,11 +14,19 @@ const AdvertisementCard = ({ advertisement }: AdvertisementCardProps) => {
   const [deleteAdvertisement, { isLoading }] = useDeleteAdvertisementMutation();
 
   const handleDelete = async () => {
-    await deleteAdvertisement(advertisement.id);
+    const confirmed = window.confirm(
+      `Удалить объявление "${advertisement.name}"?`
+    );
+    if (confirmed) {
+      await deleteAdvertisement(advertisement.id);
+    }
   };
 
   return (
-    <div className="relative w-full md:w-1/2 lg:w-1/3 p-4">
+    <Link
+      to={`/advertisements/${advertisement.id}`}
+      className="relative block w-full md:w-1/2 lg:w-1/3 p-4"
+    >
       <div className="flex flex-col h-full border-2 border-gray-200 rounded-lg overflow-hidden">
         <img
           className="lg:h-48 md:h-36 w-full object-cover object-center"
@@ -43,25 +51,25 @@ const AdvertisementCard = ({ advertisement }: AdvertisementCardProps) => {
               <Eye />
               {advertisement.views}
             </span>
-            <Link
-              to={`/advertisements/${advertisement.id}`}
-              className="text-indigo-500 inline-flex items-center ml-auto"
-            >
+            <span className="text-indigo-500 inline-flex items-center ml-auto">
               К объявлению
               <Arrow />
-            </Link>
+            </span>
           </div>
         </div>
         <button
           className="absolute top-0 right-0 p-2 bg-white rounded-bl-lg rounded-tr-lg bg-red-400"
           type="button"
-          onClick={handleDelete}
+          onClick={(e) => {
+            e.preventDefault();
+            handleDelete();
+          }}
           disabled={isLoading}
         >
           <Trash />
         </button>
       </div>
-    </div>
+    </Link>
   );
 };
 

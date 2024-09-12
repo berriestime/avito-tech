@@ -4,6 +4,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from './Modal';
 
 import { useCreateAdvertisementMutation } from '../api/advertisement';
 import { Advertisment } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 type NewAdvertisementForm = Omit<
   Advertisment,
@@ -18,6 +19,7 @@ const NewAdvertisementButton = () => {
     price: 0,
     imageUrl: '',
   });
+  const navigate = useNavigate();
 
   const [createAdvertisement, { isLoading }] = useCreateAdvertisementMutation();
 
@@ -27,9 +29,16 @@ const NewAdvertisementButton = () => {
       setForm((prev) => ({ ...prev, [key]: event.target.value }));
     };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    createAdvertisement(form);
+    try {
+      const { data } = await createAdvertisement(form);
+      setIsOpen(false);
+      if (!data) return;
+      navigate(`/advertisements/${data.id}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -98,7 +107,7 @@ const NewAdvertisementButton = () => {
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="imageUrl"
-                type="text"
+                type="url"
                 value={form.imageUrl}
                 onChange={handleChange('imageUrl')}
               />

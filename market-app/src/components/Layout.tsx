@@ -10,7 +10,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="container mx-auto px-0 md:px-6 lg:px-12 min-h-screen flex flex-col justify-center">
-      <header className="py-4">
+      <header className="p-4">
         <div className="container mx-auto flex items-center justify-between">
           <Link to="/" className="text-xl font-bold">
             Кабинет

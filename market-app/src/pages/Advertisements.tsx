@@ -4,7 +4,7 @@ import { Layout } from '../components/Layout';
 import { Pagination } from '../components/Pagination';
 import { Title } from '../components/Title';
 
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const AdvertisementsPage = () => {
   const { pageParam = '0' } = useParams<{ pageParam: string }>();
